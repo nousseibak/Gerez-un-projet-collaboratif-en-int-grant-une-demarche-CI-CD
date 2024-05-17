@@ -35,7 +35,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: 
-          mvn -B --file back/pom.xml verify org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar -Dsonar.projectKey=openclass-bobapp-back
+          mvn -B --file back/pom.xml verify org.sonarsource.scanner.maven:sonar-maven-plugin:3.4.1.1168:sonar -Dsonar.projectKey=openclass-bobapp-back
 
   sonarcloudScan2:
     name: SonarCloudScan2
