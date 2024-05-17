@@ -1,0 +1,62 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+
+    - name: Build backend
+      run: mvn -B package --file back/pom.xml
+
+    - name: Run backend tests and generate coverage report
+      run: mvn test jacoco:report --file back/pom.xml
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '14'
+
+    - name: Install frontend dependencies
+      run: npm install
+      working-directory: front
+
+    - name: Build frontend
+      run: npm run build --prod
+      working-directory: front
+
+    - name: Build and push Docker images
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      run: |
+        echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+        docker build -t $DOCKER_USERNAME/myapp-backend:latest back/
+        docker build -t $DOCKER_USERNAME/myapp-frontend:latest front/
+        docker push $DOCKER_USERNAME/myapp-backend:latest
+        docker push $DOCKER_USERNAME/myapp-frontend:latest
+
+    - name: Deploy to Docker Hub
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      run: |
+        docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+        docker push $DOCKER_USERNAME/bobapp:latest
+        docker push $DOCKER_USERNAME/openclass-bobapp-front:latest
