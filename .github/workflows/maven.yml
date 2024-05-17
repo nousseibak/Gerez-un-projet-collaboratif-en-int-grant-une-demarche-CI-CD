@@ -40,10 +40,4 @@ jobs:
         name: coverage-report
         path: back/target/site/jacoco/index.html
 
-    - name: Run SonarQube scan
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: |
-        cd back
-        mvn sonar:sonar
 
