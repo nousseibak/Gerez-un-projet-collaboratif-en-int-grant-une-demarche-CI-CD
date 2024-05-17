@@ -54,10 +54,8 @@ jobs:
 
     - name: Deploy Backend
       run: |
-        docker pull $DOCKER_USERNAME/bobapp-back
         docker run -d -p 8080:8080 $DOCKER_USERNAME/bobapp-back
 
     - name: Deploy Frontend
       run: |
-        docker pull $DOCKER_USERNAME/bobapp-front
         docker run -d -p 4200:4200 $DOCKER_USERNAME/bobapp-front
