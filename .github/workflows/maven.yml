@@ -19,6 +19,17 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    services:
+      docker:
+        image: docker:19.03.12
+        options: --privileged
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_DB: test_db
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK 11
