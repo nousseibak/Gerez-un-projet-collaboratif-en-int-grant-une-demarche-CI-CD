@@ -52,11 +52,12 @@ jobs:
         docker push $DOCKER_USERNAME/bobapp-back:latest
         docker push $DOCKER_USERNAME/bobapp-front:latest
 
-    - name: Deploy to Docker Hub
-      env:
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+    - name: Deploy Backend
       run: |
-        docker login -u $DOCKER_USERNAME --password-stdin
-        docker push $DOCKER_USERNAME/bobapp-back:latest
-        docker push $DOCKER_USERNAME/bobapp-front:latest
+        docker pull $DOCKER_USERNAME/bobapp-back:latest
+        docker run -d -p 8080:8080 $DOCKER_USERNAME/bobapp-back:latest
+
+    - name: Deploy Frontend
+      run: |
+        docker pull $DOCKER_USERNAME/bobapp-front:latest
+        docker run -d -p 4200:4200 $DOCKER_USERNAME/bobapp-front:latest
