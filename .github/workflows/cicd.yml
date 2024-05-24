@@ -87,7 +87,8 @@ jobs:
       run: 
         mvn -B --file back/pom.xml verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Pcoverage -Dsonar.projectKey=openclass-bobapp-back
 
-      
+##################
+
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@master
       env: 
@@ -95,7 +96,7 @@ jobs:
       with:
         projectBaseDir: front/
 
-      
+##################      
     - name: Build and push Docker images
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
