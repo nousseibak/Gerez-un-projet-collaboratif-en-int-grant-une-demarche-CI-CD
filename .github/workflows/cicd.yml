@@ -52,10 +52,3 @@ jobs:
         docker push $DOCKER_USERNAME/bobapp-back:latest
         docker push $DOCKER_USERNAME/bobapp-front:latest
 
-    - name: Deploy Backend
-      run: |
-        docker run -d -p 8080:8080 $DOCKER_USERNAME/bobapp-back
-
-    - name: Deploy Frontend
-      run: |
-        docker run -d -p 4200:4200 $DOCKER_USERNAME/bobapp-front
