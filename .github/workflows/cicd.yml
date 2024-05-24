@@ -29,6 +29,12 @@ jobs:
     - name: Run backend tests and generate coverage report
       run: mvn test jacoco:report --file back/pom.xml
 
+    - name: Upload coverage report
+      uses: actions/upload-artifact@v2
+      with:
+        name: coverage-report
+        path: back/target/site/jacoco/index.html
+
 ##################
 
     - name: Set up Node.js
