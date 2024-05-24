@@ -109,6 +109,7 @@ jobs:
         docker push $DOCKER_USERNAME/bobapp-front:latest
 
 ##################
+
     - name: Install Docker Compose
       run: |
         DOCKER_COMPOSE_VERSION=1.29.2
@@ -124,3 +125,6 @@ jobs:
         echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
         docker-compose -f docker-compose.yml build
         docker-compose -f docker-compose.yml push
+#####################
+    - name: Docker Logout
+      run: docker logout
