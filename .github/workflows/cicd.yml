@@ -116,6 +116,11 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '14'
+
     - name: Run tests with Karma and generate coverage
       run: npm run test -- --no-watch --code-coverage
       working-directory: ./front
