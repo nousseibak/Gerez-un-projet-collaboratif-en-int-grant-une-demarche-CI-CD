@@ -124,6 +124,10 @@ jobs:
     - name: Install Angular CLI
       run: npm install -g @angular/cli
 
+    - name: Install frontend dependencies
+      run: npm install
+      working-directory: front
+
     - name: Run tests with Karma and generate coverage
       run: npm run test -- --no-watch --code-coverage
       working-directory: ./front
