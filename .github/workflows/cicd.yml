@@ -121,6 +121,9 @@ jobs:
       with:
         node-version: '14'
 
+    - name: Install Angular CLI
+      run: npm install -g @angular/cli
+
     - name: Run tests with Karma and generate coverage
       run: npm run test -- --no-watch --code-coverage
       working-directory: ./front
