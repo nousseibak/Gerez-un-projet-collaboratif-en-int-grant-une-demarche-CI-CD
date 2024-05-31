@@ -35,6 +35,9 @@ jobs:
     needs: build-backend
     
     steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
     - name: Run backend tests and generate coverage report
       run: mvn test jacoco:report package --file back/pom.xml
 
