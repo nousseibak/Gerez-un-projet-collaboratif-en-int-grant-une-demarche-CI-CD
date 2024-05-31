@@ -36,8 +36,7 @@ jobs:
     
     steps:
     - name: Run backend tests and generate coverage report
-      run: mvn test jacoco:report
-      working-directory: back
+      run: mvn test jacoco:report package --file back/pom.xml
 
     - name: Upload coverage report
       uses: actions/upload-artifact@v2
