@@ -164,7 +164,9 @@ jobs:
     needs: [analyse-frontend, analyse-backend]
     
     steps: 
-    
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
     - name: Install Docker Compose
       run: |
         DOCKER_COMPOSE_VERSION=1.29.2
