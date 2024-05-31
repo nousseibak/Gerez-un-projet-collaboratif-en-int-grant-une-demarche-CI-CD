@@ -89,6 +89,8 @@ jobs:
     runs-on: ubuntu-latest
        
     steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
     
     - name: Set up Node.js
       uses: actions/setup-node@v3
@@ -111,6 +113,8 @@ jobs:
     needs: build-frontend
     
     steps: 
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
     - name: Run tests with Karma and generate coverage
       run: npm run test -- --no-watch --code-coverage
@@ -127,7 +131,10 @@ jobs:
     name: analyse front
     runs-on: ubuntu-latest 
     needs: test-frontend
+    
     steps: 
+    - name: Checkout repository
+      uses: actions/checkout@v4
     
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@master
