@@ -7,6 +7,8 @@ on:
   pull_request:
     branches:
       - main
+  workflow_dispatch: # Permet le lancement manuel
+
 ##########################################################
 jobs:
   build-backend:
