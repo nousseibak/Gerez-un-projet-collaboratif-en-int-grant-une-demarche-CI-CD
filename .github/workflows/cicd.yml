@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: Checkout repository back
       uses: actions/checkout@v4
 
 
@@ -37,7 +37,7 @@ jobs:
     needs: build-backend
     
     steps:
-    - name: Checkout repository
+    - name: Checkout repository front
       uses: actions/checkout@v4
       
     - name: Run backend tests and generate coverage report
