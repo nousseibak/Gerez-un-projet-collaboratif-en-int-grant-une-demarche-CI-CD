@@ -44,7 +44,7 @@ jobs:
       run: mvn test jacoco:report package --file back/pom.xml
 
     - name: Upload coverage report
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: coverage-report
         path: back/target/site/jacoco/index.html
@@ -135,7 +135,7 @@ jobs:
       working-directory: ./front
 
     - name: Upload coverage report
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: coverage-report
         path: front/coverage/
