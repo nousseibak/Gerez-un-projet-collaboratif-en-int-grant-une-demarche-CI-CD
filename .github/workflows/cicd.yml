@@ -37,7 +37,7 @@ jobs:
     needs: build-backend
     
     steps:
-    - name: Checkout repository front
+    - name: Checkout repository back
       uses: actions/checkout@v4
       
     - name: Run backend tests and generate coverage report
