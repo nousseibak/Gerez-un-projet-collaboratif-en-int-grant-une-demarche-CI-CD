@@ -149,9 +149,6 @@ jobs:
     steps: 
     - name: Checkout repository
       uses: actions/checkout@v4
-
-    - name: Navigate to front directory
-      run: cd front
     
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@master
