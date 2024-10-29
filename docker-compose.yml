@@ -1,28 +1,29 @@
-version: '3.8'
+version: '3.8'  # Spécifie la version du format de fichier de Docker Compose
 
-services:
-  backend:
-    image: nousscda053/bobapp-back
-    build:
-      context: ./back
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-    environment:
-      - SPRING_PROFILES_ACTIVE=prod
-    networks:
-      - bobapp-network
+services:  # Définit les services à orchestrer
 
-  frontend:
-    image: nousscda053/bobapp-front
-    build:
-      context: ./front
-      dockerfile: Dockerfile
-    ports:
-      - "4200:80"
-    networks:
-      - bobapp-network
+  backend:  # Configuration du service backend
+    image: nousscda053/bobapp-back  # Utilise une image spécifique du backend BobApp sur Docker Hub
+    build:  # Spécifie la construction de l'image à partir d'un Dockerfile local
+      context: ./back  # Définit le chemin vers le code source backend
+      dockerfile: Dockerfile  # Nom du Dockerfile utilisé pour construire l'image backend
+    ports:  # Mapping des ports du backend entre conteneur et hôte
+      - "8080:8080"  # Expose le port 8080 de l'hôte pour accéder au port 8080 du conteneur
+    environment:  # Déclare les variables d'environnement pour le conteneur backend
+      - SPRING_PROFILES_ACTIVE=prod  # Active le profil 'prod' de Spring Boot
+    networks:  # Attribue un réseau pour la communication entre services
+      - bobapp-network  # Relie le backend au réseau 'bobapp-network'
 
-networks:
-  bobapp-network:
-    driver: bridge
+  frontend:  # Configuration du service frontend
+    image: nousscda053/bobapp-front  # Utilise une image spécifique du frontend BobApp sur Docker Hub
+    build:  # Spécifie la construction de l'image à partir d'un Dockerfile local
+      context: ./front  # Définit le chemin vers le code source frontend
+      dockerfile: Dockerfile  # Nom du Dockerfile utilisé pour construire l'image frontend
+    ports:  # Mapping des ports du frontend entre conteneur et hôte
+      - "4200:80"  # Expose le port 80 du conteneur sur le port 4200 de l'hôte
+    networks:  # Attribue un réseau pour la communication entre services
+      - bobapp-network  # Relie le frontend au réseau 'bobapp-network'
+
+networks:  # Définition des réseaux Docker utilisés pour la communication entre services
+  bobapp-network:  # Crée le réseau 'bobapp-network'
+    driver: bridge  # Utilise le driver 'bridge' pour isoler les services, leur permettant de communiquer directement entre eux
